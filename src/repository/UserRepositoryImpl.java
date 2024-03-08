@@ -118,8 +118,7 @@ public class UserRepositoryImpl implements UserRepository {
             preparedStatement.setBoolean(6, user.getIs_verified());
             preparedStatement.setInt(7, id);
 
-            int rowsUpdated = preparedStatement.executeUpdate();
-            return rowsUpdated;
+            return preparedStatement.executeUpdate();
 
         } catch (SQLException sqlException) {
             System.out.println("Problem during updating data in database: " + sqlException.getMessage());
