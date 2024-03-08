@@ -8,6 +8,6 @@ public interface UserRepository {
     List<User> fetchAllUsers();
     int createUser(User user);
     int deleteUser(Integer userId);
-    User updateUser(Integer id,User user);
+    int updateUser(int id, User user);
     Optional<User> searchByID(Integer id);
 }

@@ -13,7 +13,7 @@ public class UserController {
     public void getAllUsers() {
         List<User> users = service.getAllUsers().stream()
                 .filter(user -> !user.getIs_deleted())
-                .collect(Collectors.toList());
+                .toList();
 
         for (User user : users) {
             System.out.println("User Id: " + user.getUser_id());

@@ -96,38 +96,35 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User updateUser(Integer id,User user) {
-        String sql = "UPDATE users SET user_name = ?, user_email = ?, is_deleted = ?, user_password = ?, is_verified = ?, user_uuid = ? WHERE user_id = ?";
+    public int updateUser(int id, User user) {
         PropertiesLoader.loadProperties();
+
+        String sql = "UPDATE users SET user_uuid = ?, user_name = ?, user_email = ?, user_password = ?, is_deleted = ?, is_verified = ? WHERE user_id = ?";
 
         try (Connection connection = DriverManager.getConnection(
                 PropertiesLoader.PROPERTIES.getProperty("database_url"),
                 PropertiesLoader.PROPERTIES.getProperty("database_username"),
-                PropertiesLoader.PROPERTIES.getProperty("database_password"));
+                PropertiesLoader.PROPERTIES.getProperty("database_password")
+        );
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setString(1, user.getUser_name());
-            preparedStatement.setString(2, user.getUser_email());
-            preparedStatement.setBoolean(3, user.getIs_deleted());
+            System.out.println("Connected to database");
+
+            preparedStatement.setString(1, user.getUser_uuid());
+            preparedStatement.setString(2, user.getUser_name());
+            preparedStatement.setString(3, user.getUser_email());
             preparedStatement.setString(4, user.getUser_password());
-            preparedStatement.setBoolean(5, user.getIs_verified());
-            preparedStatement.setString(6, user.getUser_uuid());
-            preparedStatement.setInt(7, user.getUser_id());
+            preparedStatement.setBoolean(5, user.getIs_deleted());
+            preparedStatement.setBoolean(6, user.getIs_verified());
+            preparedStatement.setInt(7, id);
 
             int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated;
 
-            if (rowsUpdated > 0) {
-                System.out.println("User updated successfully");
-                return user;
-            } else {
-                System.out.println("User not found");
-                return null;
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
+        } catch (SQLException sqlException) {
+            System.out.println("Problem during updating data in database: " + sqlException.getMessage());
         }
+        return 0;
     }
 
     @Override
