@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
-    List<User> getAllUsers();
-    void createUser(User user);
-    void deleteUser(Integer userId);
-    User updateUser(User user);
+    List<User> fetchAllUsers();
+    int createUser(User user);
+    int deleteUser(Integer userId);
+    User updateUser(Integer id,User user);
     Optional<User> searchByID(Integer id);
 }

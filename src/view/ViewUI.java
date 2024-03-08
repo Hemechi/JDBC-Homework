@@ -1,7 +1,6 @@
 package view;
 
 import controller.UserController;
-
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -14,13 +13,14 @@ public class ViewUI {
         System.out.println("2. Create User".toUpperCase(Locale.ROOT));
         System.out.println("3. Delete User by ID".toUpperCase(Locale.ROOT));
         System.out.println("4. Update User by ID".toUpperCase(Locale.ROOT));
-        System.out.println("5. Exit Program".toUpperCase(Locale.ROOT));
+        System.out.println("5. Search User by ID".toUpperCase(Locale.ROOT));
+        System.out.println("6. Exit Program".toUpperCase(Locale.ROOT));
         System.out.println("+".repeat(55));
     }
 
     private int getUserOption() {
         displayMenu();
-        System.out.print("> Enter Option (1-5): ");
+        System.out.print("> Enter Option (1-6): ");
         return new Scanner(System.in).nextInt();
     }
 
@@ -31,7 +31,8 @@ public class ViewUI {
                 case 2 -> userController.addUser();
                 case 3 -> userController.deleteUserById();
                 case 4 -> userController.updateUserById();
-                case 5 -> {
+                case 5 -> userController.searchUserById();
+                case 6 -> {
                     System.out.println("Exiting program. Goodbye!");
                     System.exit(0);
                 }

@@ -2,15 +2,16 @@ package service;
 
 import model.User;
 import repository.UserRepository;
+import repository.UserRepositoryImpl;
 
 import java.util.List;
 import java.util.Optional;
 
 public class ServiceImpl implements Service {
-    private static final UserRepository repository = new UserRepository();
+    private static final UserRepository repository = new UserRepositoryImpl();
     @Override
     public List<User> getAllUsers() {
-        return repository.getAllUsers();
+        return repository.fetchAllUsers();
     }
 
     @Override
@@ -23,11 +24,11 @@ public class ServiceImpl implements Service {
     }
     @Override
     public int deleteUserById(int id) {
-        return repository.deleteUserById(id);
+        return repository.deleteUser(id);
     }
     @Override
     public int updateUserById(int id, User user) {
-        return repository.updateUserById(id,user);
+        return repository.updateUser(id,user);
     }
 
 }
