@@ -5,7 +5,6 @@ import service.Service;
 import service.ServiceImpl;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class UserController {
     private static final Service service = new ServiceImpl();
@@ -45,8 +44,7 @@ public class UserController {
 
     public void deleteUserById() {
         System.out.print("> Insert User ID: ");
-        Integer userId = new Scanner(System.in).nextInt();
-        // Check if the user with the given ID exists
+        int userId = new Scanner(System.in).nextInt();
         boolean userExists = service.getAllUsers().stream()
                 .anyMatch(user -> user.getUser_id().equals(userId));
         if (userExists) {
@@ -87,7 +85,6 @@ public class UserController {
                     System.out.println("ID: " + user.getUser_id());
                     System.out.println("Name: " + user.getUser_name());
                     System.out.println("Email: " + user.getUser_email());
-                    // Print other user details if needed
                 },
                 () -> System.out.println("User with ID " + userId + " not found.")
         );
